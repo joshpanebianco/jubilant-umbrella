@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import AirplanesGallery from './AirplanesGallery'
 
 class Airplanes extends Component {
   constructor() {
@@ -6,8 +7,9 @@ class Airplanes extends Component {
     // state to hold name, rows and cols
     this.state = {
       name: '',
-      rows: 0,
-      cols: 0,
+      rows: '',
+      cols: '',
+      flights: [],
     };
 
     // bind this to each event handler function
@@ -33,12 +35,25 @@ class Airplanes extends Component {
   // handler to submit to parent function onSubmit
   _handleSubmit(event) {
     event.preventDefault();
-    console.log("Submitted");
+    // create newFlight with state variables
+    const newFlight = {
+      name: this.state.name,
+      rows: this.state.rows,
+      cols: this.state.cols,
+    };
+
+    // add the newFlight to all existing flights array
+    const allFlights = this.state.flights;
+    allFlights.push(newFlight);
+
+    // 
     this.setState({
       name: '',
-      rows: 0,
-      cols: 0,
+      rows: '',
+      cols: '',
+      flights: allFlights,
     });
+    console.log("Submitted");
   }
 
   render() {
@@ -48,19 +63,19 @@ class Airplanes extends Component {
         <form onSubmit={ this._handleSubmit }>
           <label>
             Name:
-            <input type="text" name="name" required onChange={ this._handleChangeName }/>
+            <input type="text" name="name" value={this.state.name} required onChange={ this._handleChangeName }/>
           </label>
           <label>
             Number of Rows:
-            <input type="number" name="rows" required onChange={ this._handleChangeRows } />
+            <input type="number" name="rows" value={this.state.rows} required onChange={ this._handleChangeRows } />
           </label>
           <label>
             Number of Columns:
-            <input type="number" name="columns" required onChange={ this._handleChangeCols }/>
+            <input type="number" name="columns" value={this.state.cols} required onChange={ this._handleChangeCols }/>
           </label>
           <input type="submit" value="Submit" />
         </form>
-        <AirplaneGallery />
+        <AirplanesGallery />
       </div>
     );
   };
