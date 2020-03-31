@@ -3,9 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 
 import Home from './Home';
 import SignUp from './SignUp';
-
 import CreatePlane from './CreatePlane';
-
 import LogIn from './LogIn';
 import Airplanes from './Airplanes';
 import Flights from './Flights';
@@ -17,9 +15,7 @@ const Main = () => {
     <Switch>
       <Route exact path='/' component={Home}></Route>
       <Route exact path='/signup' component={SignUp}></Route>
-
       <Route exact path='/create-plane' component={CreatePlane}></Route>
-
       <Route exact path='/login' component={LogIn}></Route>
       <Route exact path='/airplanes' component={Airplanes}></Route>
       <Route exact path='/flights' component={Flights}></Route>
