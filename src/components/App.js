@@ -1,12 +1,13 @@
 import React from 'react';
 import './App.css';
-import CreatePlane from './CreatePlane';
+
+import Main from './Main';
 
 function App() {
   return (
-     <div className="App">
-      <CreatePlane />
-     </div>
+    <div className="App">
+      <Main />
+    </div>
   );
 }
 
