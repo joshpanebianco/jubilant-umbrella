@@ -60,6 +60,7 @@ class Airplanes extends Component {
           </label>
           <input type="submit" value="Submit" />
         </form>
+        <AirplaneGallery />
       </div>
     );
   };
