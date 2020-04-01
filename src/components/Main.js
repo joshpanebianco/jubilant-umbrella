@@ -20,7 +20,7 @@ const Main = () => {
         <Route exact path='/signup' component={SignUp}></Route>
         <Route exact path='/login' component={LogIn}></Route>
         <Route exact path='/airplanes' component={Airplanes}></Route>
-        <Route exact path='/flights' component={Flights}></Route>
+        <Route exact path='/flights' render={routeProps => <Flights something="foo" />}></Route>
         <Route exact path='/search' component={Search}></Route>
 
         <PrivateRoute path='/admin' component={Admin}></PrivateRoute>
