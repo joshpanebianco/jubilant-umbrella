@@ -16,8 +16,6 @@ class Flights extends Component {
       flights: [],
     };
 
-    console.log(props.something);
-
     // bind this to each event handler function
     this._handleChangeFlightNumber = this._handleChangeFlightNumber.bind(this);
     this._handleChangeDate = this._handleChangeDate.bind(this);
@@ -80,9 +78,9 @@ class Flights extends Component {
       origin: this.state.origin,
       airplane: this.state.airplane,
     };
-    const allFlights = this.state.flights;
-    allFlights.push(newFlight);
-    this.setState({flights: allFlights});
+
+    // post the newFlight to all existing flight DB and update this.state.flights
+    this.saveFlight(newFlight);
 
     // reset state variables
     this.setState({
@@ -105,7 +103,7 @@ class Flights extends Component {
           </label>
           <label>
             Date
-            <input type='text' name='date' value={this.state.date} required onChange={ this._handleChangeDate } />
+            <input type='date' name='date' value={this.state.date} required onChange={ this._handleChangeDate } />
           </label>
           <label>
             To
