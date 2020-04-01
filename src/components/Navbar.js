@@ -12,6 +12,7 @@ class Navbar extends Component {
           <Link to="/airplanes" className="nav-item">Create Airplane</Link>
           <Link to="/flights" className="nav-item">Create Flight</Link>
           <Link to="/search" className="nav-item">Search Flight</Link>
+          <Link to="/reservations" className="nav-item">Make Reservation</Link>
         </div>
       </div>
     );

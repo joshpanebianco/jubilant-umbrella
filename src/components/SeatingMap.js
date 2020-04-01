@@ -1,17 +1,31 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-import Row from './Row';
+import PlaneMap from './PlaneMap';
 
-function SeatingMap() {
-	return (
-		<div>
-	    <h2>Seating map</h2>
-			<div className="seating-chart">
-			  <Row />
+class SeatingMap extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			name: 'QF123',
+			rows: 10,
+			cols: 4,
+			reservedRow: '',
+			reservedCol: '',
+		};
+
+	}
+
+	render() {
+		return (
+			<div>
+		    <h2>{this.state.name} Seating Map</h2>
+				<div className="seating-chart">
+				  <PlaneMap plane={this.state}/>
+				</div>
 			</div>
-		</div>
-	)
+		)
+	}
 }
 
 export default SeatingMap;
