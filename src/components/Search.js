@@ -18,13 +18,11 @@ class Search extends Component {
   }
 
   searchFlight(origin, destination) {
-    const flightInfo = this.state.flightInfo;
     axios.get(SERVER_URL).then((results) => {
       // Check matched flights
       results.data.forEach((f) => {
-        console.log(f)
         if (f.origin === capitalize(origin) && f.destination === capitalize(destination)) {
-          this.setState({flightInfo: flightInfo.concat(f)});  // Use concat because concat() does not mutate original array
+          this.setState(this.setState({flightInfo: []}), () => {this.setState({flightInfo: this.state.flightInfo.concat(f)})});  // Use concat because concat() does not mutate original array,
           this.setState({plane: f.airplane})
         }
       });
