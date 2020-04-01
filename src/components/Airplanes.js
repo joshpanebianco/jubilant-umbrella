@@ -46,7 +46,7 @@ class Airplanes extends Component {
     const allFlights = this.state.flights;
     allFlights.push(newFlight);
 
-    // 
+    //
     this.setState({
       name: '',
       rows: '',
@@ -75,7 +75,7 @@ class Airplanes extends Component {
           </label>
           <input type="submit" value="Submit" />
         </form>
-        <AirplanesGallery />
+        <AirplanesGallery flights={this.state.flights}/>
       </div>
     );
   };
