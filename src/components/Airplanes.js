@@ -3,6 +3,8 @@ import AirplanesGallery from './AirplanesGallery'
 import axios from 'axios';
 
 const SERVER_URL = 'http://localhost:3000/airplanes.json'
+// const SERVER_URL = 'http://airline.herokuapp.com/airplanes.json'
+// const SERVER_URL = 'ngrok.io'
 
 class Airplanes extends Component {
   constructor() {
