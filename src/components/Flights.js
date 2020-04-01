@@ -5,7 +5,7 @@ import FlightGallery from './FlightGallery';
 const SERVER_URL = 'http://localhost:3000/flights.json'
 
 class Flights extends Component {
-  constructor() {
+  constructor(props) {
     super();
     this.state = {
       flight_number: '',
@@ -15,6 +15,8 @@ class Flights extends Component {
       airplane: '',
       flights: [],
     };
+
+    console.log(props.something);
 
     // bind this to each event handler function
     this._handleChangeFlightNumber = this._handleChangeFlightNumber.bind(this);
@@ -92,7 +94,7 @@ class Flights extends Component {
     });
   }
 
-  render() {
+  render(props) {
     return (
       <div>
         <h1>Create A New Flight</h1>
