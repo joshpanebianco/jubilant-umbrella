@@ -6,7 +6,7 @@ class Navbar extends Component {
     return (
       <div className="top-nav">
         <div className="nav-list">
-          <Link to="/" className="nav-item">Home</Link>
+          <Link to="/" className="nav-item">Burning Airlines</Link>
           <Link to="/signup" className="nav-item">Sign Up</Link>
           <Link to="/login" className="nav-item">Log In</Link>
           <Link to="/create-plane"className="nav-item">Create Airplane</Link>

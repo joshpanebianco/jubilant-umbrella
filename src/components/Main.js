@@ -7,6 +7,7 @@ import LogIn from './LogIn';
 import Airplanes from './Airplanes';
 import Flights from './Flights';
 import Search from './Search';
+import SeatingMap from './SeatingMap';
 
 
 const Main = () => {
@@ -18,7 +19,7 @@ const Main = () => {
       <Route exact path='/airplanes' component={Airplanes}></Route>
       <Route exact path='/flights' component={Flights}></Route>
       <Route exact path='/search' component={Search}></Route>
-
+      <Route exact path='/seatingmap' component={SeatingMap}></Route>
     </Switch>
   );
 }
