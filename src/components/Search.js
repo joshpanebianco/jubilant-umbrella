@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 // Global function will be used
 const capitalize = (string) => string.charAt(0).toUpperCase() + string.slice(1);  // Uppercase the first letter of a string
@@ -111,7 +112,9 @@ const FlightDetails = (props) => {
           {props.flightInfo.map((f) => 
             <tr key={f.id}>
               <td>{f.date}</td>
-              <td>{f.flight_number}</td>
+              <Link to="/reservation">
+                <td>{f.flight_number}</td>
+              </Link>
               <td>{f.origin}>{f.destination}</td>
               <td>{f.airplaneName}</td>
             </tr>
