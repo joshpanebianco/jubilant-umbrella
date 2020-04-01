@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
+// Global function will be used
+const capitalize = (string) => string.charAt(0).toUpperCase() + string.slice(1);  // Uppercase the first letter of a string
+
 // Change after deployment
 const SERVER_URL = 'http://localhost:3000/flights.json';
 
@@ -9,13 +12,25 @@ class Search extends Component {
     super();
     this.state = {
       flightInfo: [],
+      plane: '',
     }
     this.searchFlight = this.searchFlight.bind(this);
   }
 
-  searchFlight() {
+  searchFlight(origin, destination) {
+    const flightInfo = this.state.flightInfo;
     axios.get(SERVER_URL).then((results) => {
-      this.setState({flightInfo: results.data});
+      // Check matched flights
+      results.data.forEach((f) => {
+        console.log(f)
+        if (f.origin === capitalize(origin) && f.destination === capitalize(destination)) {
+          this.setState({flightInfo: flightInfo.concat(f)});  // Use concat because concat() does not mutate original array
+          this.setState({plane: f.airplane})
+        }
+      });
+
+      // Below is for test
+      // this.setState({flightInfo: results.data});
     });
   }
 
@@ -23,19 +38,21 @@ class Search extends Component {
     return (
       <div>
         <h1>Find Your Plane</h1>
-        <SearchForm onSubmit={this.searchFlight} />
-        <FlightDetails flightInfo={this.state.flightInfo} />
+        <SearchForm 
+          onSubmit={this.searchFlight}
+          flightInfo={this.state.flightInfo}
+        />
       </div>
     );
   };
 }
 
 class SearchForm extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       origin: '',
-      destination: ''
+      destination: '',
     }
     this._handleSubmit = this._handleSubmit.bind(this);
     this._handleChange = this._handleChange.bind(this);
@@ -43,7 +60,7 @@ class SearchForm extends Component {
 
   _handleSubmit(event) {
     event.preventDefault();
-    this.props.onSubmit();
+    this.props.onSubmit(this.state.origin, this.state.destination);
   }
 
   _handleChange(event) {
@@ -57,17 +74,24 @@ class SearchForm extends Component {
 
   render() {
     return (
-      <form onSubmit={this._handleSubmit}>
-        <label>
-          From:
-          <input type="text" placeholder="From" name="origin" onChange={this._handleChange} />
-        </label>
-        <label>
-          To:
-          <input type="text" placeholder="To" name="destination" onChange={this._handleChange} />
-        </label>
-        <input type="submit" value="Search" />
-      </form>
+      <div>
+        <form onSubmit={this._handleSubmit}>
+          <label>
+            From:
+            <input type="text" placeholder="From" name="origin" onChange={this._handleChange} />
+          </label>
+          <label>
+            To:
+            <input type="text" placeholder="To" name="destination" onChange={this._handleChange} />
+          </label>
+          <input type="submit" value="Search" />
+        </form>
+        <FlightDetails 
+          flightInfo={this.props.flightInfo}
+          origin={this.state.origin} 
+          destination={this.state.destination}
+        />
+      </div>
     );
   }
 }
@@ -75,7 +99,27 @@ class SearchForm extends Component {
 const FlightDetails = (props) => {
   return (
     <div>
-      {props.flightInfo.map((f) => <p key={f.id}>from: {f.origin}; to: {f.destination}</p>)}
+      <h2>Flight from {capitalize(props.origin)} to {capitalize(props.destination)}</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Flight</th>
+            <th>From>To</th>
+            <th>Plane</th>
+          </tr>
+        </thead>
+        <tbody>
+          {props.flightInfo.map((f) => 
+            <tr key={f.id}>
+              <td>{f.date}</td>
+              <td>{f.flight_number}</td>
+              <td>{f.origin}>{f.destination}</td>
+              <td>Coming</td>
+            </tr>
+            )}
+          </tbody>
+      </table>
     </div>
   );
 }
