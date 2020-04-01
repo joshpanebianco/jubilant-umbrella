@@ -12,7 +12,6 @@ class Search extends Component {
     super();
     this.state = {
       flightInfo: [],
-      plane: '',
     }
     this.searchFlight = this.searchFlight.bind(this);
   }
@@ -22,6 +21,7 @@ class Search extends Component {
       // Check matched flights
       results.data.forEach((f) => {
         if (f.origin === capitalize(origin) && f.destination === capitalize(destination)) {
+          f.airplaneName = this.props.projectInfo.airplanesJson[f.airplane_id-1].name
           this.setState(this.setState({flightInfo: []}), () => {this.setState({flightInfo: this.state.flightInfo.concat(f)})});  // Use concat because concat() does not mutate original array,
           this.setState({plane: f.airplane})
         }
@@ -113,7 +113,7 @@ const FlightDetails = (props) => {
               <td>{f.date}</td>
               <td>{f.flight_number}</td>
               <td>{f.origin}>{f.destination}</td>
-              <td>Coming</td>
+              <td>{f.airplaneName}</td>
             </tr>
             )}
           </tbody>
