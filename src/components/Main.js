@@ -21,31 +21,6 @@ const USERS_SERVER_URL = BASE_URL + 'users.json';
 const RESERVATIONS_SERVER_URL = BASE_URL + 'reservations.json';
 
 
-const Main = (props) => {
-
-  const existingTokens = JSON.parse(localStorage.getItem("tokens"));
-  const [authTokens, setAuthTokens] = useState(existingTokens);
-
-  const setTokens = (data) => {
-    localStorage.setItem("tokens", JSON.stringify(data));
-    setAuthTokens(data);
-  }
-
-  return (
-    <AuthContext.Provider value={{ authTokens, setAuthTokens: setTokens }}>
-      <Switch>
-        <Route exact path='/' component={Home}></Route>
-        <Route exact path='/signup' component={SignUp}></Route>
-        <Route exact path='/login' component={LogIn}></Route>
-        <Route exact path='/airplanes' component={Airplanes}></Route>
-        <Route exact path='/flights' render={routeProps => <Flights something="foo" />}></Route>
-        <Route exact path='/search' component={Search}></Route>
-
-        <PrivateRoute path='/admin' component={Admin}></PrivateRoute>
-      </Switch>
-    </AuthContext.Provider>
-  );
-
 class Main extends Component {
   constructor() {
     super();
