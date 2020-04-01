@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { AuthContext } from './context/auth';
 import PrivateRoute from './PrivateRoute';
@@ -12,9 +12,18 @@ import Flights from './Flights';
 import Search from './Search';
 
 
-const Main = () => {
+const Main = (props) => {
+
+  const existingTokens = JSON.parse(localStorage.getItem("tokens"));
+  const [authTokens, setAuthTokens] = useState(existingTokens);
+
+  const setTokens = (data) => {
+    localStorage.setItem("tokens", JSON.stringify(data));
+    setAuthTokens(data);
+  }
+
   return (
-    <AuthContext.Provider value={false}>
+    <AuthContext.Provider value={{ authTokens, setAuthTokens: setTokens }}>
       <Switch>
         <Route exact path='/' component={Home}></Route>
         <Route exact path='/signup' component={SignUp}></Route>
