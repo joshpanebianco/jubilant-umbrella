@@ -76,7 +76,7 @@ class Main extends Component {
           <Route exact path='/airplanes' component={Airplanes}></Route>
           <Route exact path='/flights' render={routeProps => <Flights something="foo" />}></Route>
           <Route exact path='/search' render={routeProps => <Search projectInfo={this.state} />}></Route>
-          <Route exact path='/search' render={routeProps => <Search projectInfo={this.state} />}></Route>
+          <Route exact path='/reservation' render={routeProps => <Reservation projectInfo={this.state} />}></Route>
 
           <PrivateRoute path='/admin' component={Admin}></PrivateRoute>
         </Switch>
