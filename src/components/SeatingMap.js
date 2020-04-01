@@ -14,6 +14,13 @@ class SeatingMap extends Component {
 			reservedCol: '',
 		};
 
+		this.saveSeat = this.saveSeat.bind(this);
+	}
+
+	saveSeat(reservedRow, reservedCol) {
+		this.setState({reservedRow: reservedRow, reservedCol: reservedCol}, () => {
+			console.log(`choice (${this.state.reservedRow}-${this.state.reservedCol}) finalised`);
+		});
 	}
 
 	render() {
@@ -21,7 +28,7 @@ class SeatingMap extends Component {
 			<div>
 		    <h2>{this.state.name} Seating Map</h2>
 				<div className="seating-chart">
-				  <PlaneMap plane={this.state}/>
+				  <PlaneMap plane={this.state} onSubmit={this.saveSeat}/>
 				</div>
 			</div>
 		)

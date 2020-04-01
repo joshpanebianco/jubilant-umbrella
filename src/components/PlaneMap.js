@@ -23,9 +23,8 @@ class PlaneMap extends Component {
 
   _handleSubmit(event) {
     event.preventDefault();
-    console.log(this.state.reservedRow);
-    console.log(this.state.reservedCol);
     console.log("choice submitted");
+    this.props.onSubmit(this.state.reservedRow, this.state.reservedCol);
   }
 
   render() {
