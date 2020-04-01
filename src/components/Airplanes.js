@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import AirplanesGallery from './AirplanesGallery'
+import axios from 'axios';
+
+const SERVER_URL = 'http://localhost:3000/airplanes.json'
 
 class Airplanes extends Component {
   constructor() {
@@ -17,6 +20,29 @@ class Airplanes extends Component {
     this._handleChangeRows = this._handleChangeRows.bind(this);
     this._handleChangeCols = this._handleChangeCols.bind(this);
     this._handleSubmit = this._handleSubmit.bind(this);
+    this.saveFlight = this.saveFlight.bind(this);
+
+    // poll for flights from the DB via ajax
+    const fetchFlights = () => {
+      axios.get(SERVER_URL).then((results) => {
+        this.setState({flights: results.data});
+        setTimeout(fetchFlights, 4000);
+      });
+    };
+
+    fetchFlights();
+  }
+
+  saveFlight(newFlight) {
+    axios.post(SERVER_URL, {
+      name: newFlight.name,
+      rows: newFlight.rows,
+      cols: newFlight.cols,
+    }).then((results) => {
+      const allFlights = this.state.flights;
+      allFlights.push(results.data);
+      this.setState({flights: allFlights});
+    });
   }
 
   // handlers to setState of each state variable
@@ -42,16 +68,14 @@ class Airplanes extends Component {
       cols: this.state.cols,
     };
 
-    // add the newFlight to all existing flights array
-    const allFlights = this.state.flights;
-    allFlights.push(newFlight);
+    // post the newFlight to all existing flights DB and update this.state.flights
+    this.saveFlight(newFlight);
 
-    //
+    // reset state variables, update allFlights
     this.setState({
       name: '',
       rows: '',
       cols: '',
-      flights: allFlights,
     });
     console.log("Submitted");
   }
