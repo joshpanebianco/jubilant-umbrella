@@ -11,11 +11,11 @@ class AirplanesGallery extends Component {
             <th>Rows</th>
             <th>Columns</th>
           </tr>
-          {this.props.flights.map( (flight) =>
-              <tr key={flight.name}>
-                <td>{flight.name}</td>
-                <td>{flight.rows}</td>
-                <td>{flight.cols}</td>
+          {this.props.planes.map( (plane) =>
+              <tr key={plane.id}>
+                <td>{plane.name}</td>
+                <td>{plane.rows}</td>
+                <td>{plane.cols}</td>
               </tr>
           )}
         </table>
