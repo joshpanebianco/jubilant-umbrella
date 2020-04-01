@@ -12,6 +12,7 @@ import Airplanes from './Airplanes';
 import Flights from './Flights';
 import Search from './Search';
 import SeatingMap from './SeatingMap';
+import Reservation from './Reservation'
 
 // Backend url
 const BASE_URL = 'http://localhost:3000/'
@@ -74,6 +75,7 @@ class Main extends Component {
           <Route exact path='/login' component={LogIn}></Route>
           <Route exact path='/airplanes' component={Airplanes}></Route>
           <Route exact path='/flights' render={routeProps => <Flights something="foo" />}></Route>
+          <Route exact path='/search' render={routeProps => <Search projectInfo={this.state} />}></Route>
           <Route exact path='/search' render={routeProps => <Search projectInfo={this.state} />}></Route>
 
           <PrivateRoute path='/admin' component={Admin}></PrivateRoute>
