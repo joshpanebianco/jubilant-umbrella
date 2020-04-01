@@ -12,6 +12,7 @@ import Airplanes from './Airplanes';
 import Flights from './Flights';
 import Search from './Search';
 import SeatingMap from './SeatingMap';
+import Reservation from './Reservation'
 
 // Backend url
 const BASE_URL = 'http://localhost:3000/'
