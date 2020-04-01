@@ -11,6 +11,7 @@ import LogIn from './LogIn';
 import Airplanes from './Airplanes';
 import Flights from './Flights';
 import Search from './Search';
+import SeatingMap from './SeatingMap';
 
 // Backend url
 const BASE_URL = 'http://localhost:3000/'
@@ -18,6 +19,7 @@ const FLIGHTS_SERVER_URL = BASE_URL + 'flights.json';
 const AIRPLANES_SERVER_URL = BASE_URL + 'airplanes.json';
 const USERS_SERVER_URL = BASE_URL + 'users.json';
 const RESERVATIONS_SERVER_URL = BASE_URL + 'reservations.json';
+
 
 class Main extends Component {
   constructor() {
@@ -79,6 +81,7 @@ class Main extends Component {
       </AuthContext.Provider>
     );
   }
+
 }
 
 export default Main;
