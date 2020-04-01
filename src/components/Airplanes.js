@@ -14,7 +14,7 @@ class Airplanes extends Component {
       name: '',
       rows: '',
       cols: '',
-      flights: [],
+      planes: [],
     };
 
     // bind this to each event handler function
@@ -22,28 +22,28 @@ class Airplanes extends Component {
     this._handleChangeRows = this._handleChangeRows.bind(this);
     this._handleChangeCols = this._handleChangeCols.bind(this);
     this._handleSubmit = this._handleSubmit.bind(this);
-    this.saveFlight = this.saveFlight.bind(this);
+    this.savePlane = this.savePlane.bind(this);
 
-    // poll for flights from the DB via ajax
-    const fetchFlights = () => {
+    // poll for planes from the DB via ajax
+    const fetchPlanes = () => {
       axios.get(SERVER_URL).then((results) => {
-        this.setState({flights: results.data});
-        setTimeout(fetchFlights, 4000);
+        this.setState({planes: results.data});
+        setTimeout(fetchPlanes, 4000);
       });
     };
 
-    fetchFlights();
+    fetchPlanes();
   }
 
-  saveFlight(newFlight) {
+  savePlane(newPlane) {
     axios.post(SERVER_URL, {
-      name: newFlight.name,
-      rows: newFlight.rows,
-      cols: newFlight.cols,
+      name: newPlane.name,
+      rows: newPlane.rows,
+      cols: newPlane.cols,
     }).then((results) => {
-      const allFlights = this.state.flights;
-      allFlights.push(results.data);
-      this.setState({flights: allFlights});
+      const allPlanes = this.state.planes;
+      allPlanes.push(results.data);
+      this.setState({planes: allPlanes});
     });
   }
 
@@ -63,17 +63,17 @@ class Airplanes extends Component {
   // handler to submit to parent function onSubmit
   _handleSubmit(event) {
     event.preventDefault();
-    // create newFlight with state variables
-    const newFlight = {
+    // create newPlane with state variables
+    const newPlane = {
       name: this.state.name,
       rows: this.state.rows,
       cols: this.state.cols,
     };
 
-    // post the newFlight to all existing flights DB and update this.state.flights
-    this.saveFlight(newFlight);
+    // post the newPlane to all existing planes DB and update this.state.planes
+    this.savePlane(newPlane);
 
-    // reset state variables, update allFlights
+    // reset state variables, update allPlanes
     this.setState({
       name: '',
       rows: '',
@@ -101,7 +101,7 @@ class Airplanes extends Component {
           </label>
           <input type="submit" value="Submit" />
         </form>
-        <AirplanesGallery flights={this.state.flights}/>
+        <AirplanesGallery planes={this.state.planes}/>
       </div>
     );
   };
