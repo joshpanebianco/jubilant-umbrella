@@ -18,9 +18,9 @@ class Reservation extends Component {
             usersJson: [],
             reservationsJson: [],
             totalSeats: '',
-            reservedSeats: [], 
+            reservedSeats: [],
         };
-    
+
         const fetchUsers = () => {
             axios.get(USERS_SERVER_URL).then((results) => {
               this.setState({usersJson: results.data});
@@ -28,7 +28,7 @@ class Reservation extends Component {
             });
           };
           fetchUsers();
-      
+
           const fetchReservations = () => {
             axios.get(RESERVATIONS_SERVER_URL).then((results) => {
               this.setState({reservationsJson: results.data});
@@ -46,7 +46,7 @@ class Reservation extends Component {
             });
           };
           fetchReservations();
-      
+
           const fetchFlights = () => {
             axios.get(FLIGHTS_SERVER_URL).then((results) => {
               this.setState({flightsJson: results.data});
@@ -54,7 +54,7 @@ class Reservation extends Component {
             });
           };
           fetchFlights();
-      
+
           const fetchAirplanes = () => {
             axios.get(AIRPLANES_SERVER_URL).then((results) => {
               this.setState({airplanesJson: results.data});
@@ -68,12 +68,7 @@ class Reservation extends Component {
     render() {
         return (
             <div>
-				<h2>Plane: {this.state.airplanesJson[this.state.flightsJson.airplane_id-1].name}</h2>
-				<PlaneDropdown airplanes={this.state.airplanes} onSubmit={this._handleAirplaneChoice}/>
-		    <h2>{this.state.name} Seating Map</h2>
-				<div className="seating-chart">
-				  <PlaneMap ref={this.rowArray} plane={this.state} rowArray={this.state.rowArray} colArray={this.state.colArray} onSubmit={this.saveSeat}/>
-				</div>
+			
 			</div>
         );
     }

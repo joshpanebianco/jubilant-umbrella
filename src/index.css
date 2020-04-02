@@ -58,7 +58,8 @@ code {
 
 .submit-btn {
   background-color: #00b894;
-  color: #fff;
+  color: #000;
+  margin-top: 20px;
 }
 
 .submit-btn:hover {
