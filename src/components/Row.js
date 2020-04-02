@@ -15,6 +15,7 @@ class Row extends Component {
 		event.preventDefault();
 		const reservedRow = this.state.reservedRow;
 		const reservedCol = event.target.value;
+		this.setState({reservedCol: parseInt(reservedCol)});
 		this.props.onSubmit(reservedRow, reservedCol)
 	}
 
