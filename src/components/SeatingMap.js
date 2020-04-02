@@ -4,12 +4,22 @@ import axios from 'axios';
 import PlaneMap from './PlaneMap';
 import PlaneDropdown from './PlaneDropdown';
 
-const SERVER_URL = 'http://localhost:3000/airplanes.json'
+const BASE_URL = 'http://localhost:3000/'
+const FLIGHTS_SERVER_URL = BASE_URL + 'flights.json';
+const AIRPLANES_SERVER_URL = BASE_URL + 'airplanes.json';
+const USERS_SERVER_URL = BASE_URL + 'users.json';
+const RESERVATIONS_SERVER_URL = BASE_URL + 'reservations.json';
 
 class SeatingMap extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			flightId: props.match.params.flightId,
+			flightsJson: [],
+			usersJson: [],
+			reservationsJson: [],
+			totalSeats: '',
+			reservedSeats: [],
 			airplanes: [],
 			name: '',
 			rows: '',
@@ -26,12 +36,44 @@ class SeatingMap extends Component {
 		this.saveSeat = this.saveSeat.bind(this);
 
 		const fetchAirplanes = () => {
-			axios.get(SERVER_URL).then((results) => {
+			axios.get(AIRPLANES_SERVER_URL).then((results) => {
 				this.setState({airplanes: results.data});
 				console.log(this.state.airplanes);
 			});
 		};
 		fetchAirplanes();
+
+		const fetchUsers = () => {
+				axios.get(USERS_SERVER_URL).then((results) => {
+					this.setState({usersJson: results.data});
+					setTimeout(fetchUsers, 4000)
+				});
+			};
+			fetchUsers();
+
+			const fetchReservations = () => {
+				axios.get(RESERVATIONS_SERVER_URL).then((results) => {
+					this.setState({reservationsJson: results.data});
+					const reservedSeats = [];
+					results.data.forEach((r) => {
+						if (r.flight_id === parseInt(this.state.flightId)) {
+								reservedSeats.push({row: r.row, col: r.col});
+						}
+					});
+					this.setState({reservedSeats: reservedSeats})
+					setTimeout(fetchReservations, 4000)
+				});
+			};
+			fetchReservations();
+
+			const fetchFlights = () => {
+				axios.get(FLIGHTS_SERVER_URL).then((results) => {
+					this.setState({flightsJson: results.data});
+					setTimeout(fetchFlights, 4000)
+				});
+			};
+			fetchFlights();
+
 	}
 
 	_handleAirplaneChoice(name, rows, cols) {
@@ -59,6 +101,7 @@ class SeatingMap extends Component {
 	render() {
 		return (
 			<div>
+				<h1>{this.props.match.params.flightId}</h1>
 				<h2>Choose Plane</h2>
 				<PlaneDropdown airplanes={this.state.airplanes} onSubmit={this._handleAirplaneChoice}/>
 		    <h2>{this.state.name} Seating Map</h2>
@@ -71,35 +114,3 @@ class SeatingMap extends Component {
 }
 
 export default SeatingMap;
-
-// Notes from call with Alex
-// for loop one that is asking the number of rows
-// for loop one that is asking the number of columns
-// rows = 4
-// columns = 4
-// for (let i = 0; i < rows; i++) {
-// 	<div>
-// 	for (let j = 0; j < columns; j++) {
-// 			<button />
-// 	}
-// 	</div>
-// }
-//
-// <div>
-// 	<button />
-// 	<button />
-// 	<button />
-// 	<button />
-// </div>
-// <div>
-// 	<button />
-// 	<button />
-// 	<button />
-// 	<button />
-// </div>
-// <div>
-// 	<button />
-// 	<button />
-// 	<button />
-// 	<button />
-// </div>

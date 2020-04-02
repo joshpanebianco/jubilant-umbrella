@@ -133,7 +133,7 @@ class Flights extends Component {
           </label>
           <input type='submit' value='Submit' />
         </form>
-        <FlightGallery flights={this.state.flights}/>
+        <FlightGallery flights={this.state.flights} airplanes={this.state.airplanes}/>
       </div>
     );
   };
