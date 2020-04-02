@@ -55,3 +55,24 @@ code {
 .row {
   display: table-row;
 }
+
+.submit-btn {
+  background-color: #00b894;
+  color: #fff;
+}
+
+.submit-btn:hover {
+  background-color: #55efc4;
+}
+
+.results-card {
+  /* border: 1.5px solid grey; */
+  margin-top: 20px;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #efefef;
+}
+
+.gallery-table {
+  width: 800px;
+}
