@@ -99,7 +99,7 @@ class Airplanes extends Component {
             Number of Columns:
             <input type="number" name="columns" value={this.state.cols} required onChange={ this._handleChangeCols }/>
           </label>
-          <input type="submit" value="Submit" />
+          <input type="submit" value="Submit" className="submit-btn"/>
         </form>
         <AirplanesGallery planes={this.state.planes}/>
       </div>

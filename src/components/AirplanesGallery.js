@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class AirplanesGallery extends Component {
   render() {
     return (
-      <div>
+      <div className="results-card">
         <h2>All Airplanes</h2>
         <table>
           <thead>

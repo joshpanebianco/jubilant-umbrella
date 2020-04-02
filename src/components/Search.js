@@ -37,7 +37,7 @@ class Search extends Component {
     return (
       <div>
         <h1>Find Your Plane</h1>
-        <SearchForm 
+        <SearchForm
           onSubmit={this.searchFlight}
           flightInfo={this.state.flightInfo}
         />
@@ -83,11 +83,11 @@ class SearchForm extends Component {
             To:
             <input type="text" placeholder="To" name="destination" onChange={this._handleChange} />
           </label>
-          <input type="submit" value="Search" />
+          <input type="submit" value="Search" className="submit-btn"/>
         </form>
-        <FlightDetails 
+        <FlightDetails
           flightInfo={this.props.flightInfo}
-          origin={this.state.origin} 
+          origin={this.state.origin}
           destination={this.state.destination}
         />
       </div>
@@ -97,7 +97,7 @@ class SearchForm extends Component {
 
 const FlightDetails = (props) => {
   return (
-    <div>
+    <div className="gallery-table">
       <h2>Flight from {capitalize(props.origin)} to {capitalize(props.destination)}</h2>
       <table>
         <thead>
@@ -109,7 +109,7 @@ const FlightDetails = (props) => {
           </tr>
         </thead>
         <tbody>
-          {props.flightInfo.map((f) => 
+          {props.flightInfo.map((f) =>
             <tr key={f.id}>
               <td>{f.date}</td>
               <td><Link to={`/reservation/${f.id}`}>{f.flight_number}</Link></td>

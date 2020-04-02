@@ -18,7 +18,7 @@ function CreatePlane() {
 		    Number of Columns:
 		    <input type="text" name="columns" />
 		  </label>
-		  <input type="submit" value="Submit" />
+		  <input type="submit" value="Submit" className="submit-btn"/>
 		</form>
 		</div>
 	)

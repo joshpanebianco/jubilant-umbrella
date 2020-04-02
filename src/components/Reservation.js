@@ -18,9 +18,9 @@ class Reservation extends Component {
             usersJson: [],
             reservationsJson: [],
             totalSeats: '',
-            reservedSeats: [], 
+            reservedSeats: [],
         };
-    
+
         const fetchUsers = () => {
             axios.get(USERS_SERVER_URL).then((results) => {
               this.setState({usersJson: results.data});
@@ -28,10 +28,12 @@ class Reservation extends Component {
             });
           };
           fetchUsers();
-      
+
           const fetchReservations = () => {
             axios.get(RESERVATIONS_SERVER_URL).then((results) => {
               this.setState({reservationsJson: results.data});
+
+              // Get all reserved seats of this flight
               const reservedSeats = [];
               results.data.forEach((r) => {
                 if (r.flight_id === parseInt(this.state.flightId)) {
@@ -39,11 +41,12 @@ class Reservation extends Component {
                 }
               });
               this.setState({reservedSeats: reservedSeats})
+
               setTimeout(fetchReservations, 4000)
             });
           };
           fetchReservations();
-      
+
           const fetchFlights = () => {
             axios.get(FLIGHTS_SERVER_URL).then((results) => {
               this.setState({flightsJson: results.data});
@@ -51,7 +54,7 @@ class Reservation extends Component {
             });
           };
           fetchFlights();
-      
+
           const fetchAirplanes = () => {
             axios.get(AIRPLANES_SERVER_URL).then((results) => {
               this.setState({airplanesJson: results.data});
@@ -61,15 +64,7 @@ class Reservation extends Component {
           fetchAirplanes();
     }
 
-    
 
-    render() {
-        return (
-            <div>
-                <h1>{this.props.match.params.flightId}</h1>
-            </div>
-        );
-    }
-}
+
 
 export default Reservation;

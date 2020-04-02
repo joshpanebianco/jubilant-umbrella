@@ -131,7 +131,7 @@ class Flights extends Component {
             Plane
             <FlightsDropdown airplanes={this.state.airplanes} onChange={this._handleChangeAirplane}/>
           </label>
-          <input type='submit' value='Submit' />
+          <input type='submit' value='Submit' className="submit-btn"/>
         </form>
         <FlightGallery flights={this.state.flights} airplanes={this.state.airplanes}/>
       </div>

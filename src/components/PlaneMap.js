@@ -1,6 +1,13 @@
 import React, { Component } from 'react';
 import Row from './Row'
 import './App.css';
+import axios from 'axios';
+
+const BASE_URL = 'http://localhost:3000/'
+const FLIGHTS_SERVER_URL = BASE_URL + 'flights.json';
+const AIRPLANES_SERVER_URL = BASE_URL + 'airplanes.json';
+const USERS_SERVER_URL = BASE_URL + 'users.json';
+const RESERVATIONS_SERVER_URL = BASE_URL + 'reservations.json';
 
 class PlaneMap extends Component {
   constructor(props) {
@@ -10,6 +17,8 @@ class PlaneMap extends Component {
       colArray: [],
       reservedRow: '',
       reservedCol: '',
+      flightId: props.plane.flightId,
+      reservedSeats: props.plane.reservedSeats, // doesn't work don't know why
     };
 
     console.log(this.state.rowArray);
@@ -20,11 +29,21 @@ class PlaneMap extends Component {
 
   saveSeat(reservedRow, reservedCol) {
     this.setState({reservedRow: reservedRow, reservedCol: reservedCol});
-    console.log("choice saved");
+    console.log("choice saved, ", reservedRow, reservedCol);
   }
 
   _handleSubmit(event) {
     event.preventDefault();
+
+    axios.post(RESERVATIONS_SERVER_URL, {
+      flight_id: this.state.flightId,
+      row: this.state.reservedRow.toString(),
+      col: this.state.reservedCol,
+      // User coming soon
+    }).then((results) => {
+      console.log('success');
+    });
+
     console.log("choice submitted");
     this.props.onSubmit(this.state.reservedRow, this.state.reservedCol);
   }

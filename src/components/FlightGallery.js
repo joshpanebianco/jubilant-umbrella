@@ -9,7 +9,7 @@ class FlightGallery extends Component {
 
   render() {
     return (
-      <div>
+      <div className="gallery-table">
         <h2>All Flights</h2>
         <table>
           <thead>
