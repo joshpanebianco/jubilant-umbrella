@@ -112,9 +112,7 @@ const FlightDetails = (props) => {
           {props.flightInfo.map((f) => 
             <tr key={f.id}>
               <td>{f.date}</td>
-              <Link to="/reservation">
-                <td>{f.flight_number}</td>
-              </Link>
+              <td><Link to={`/reservation/${f.id}`}>{f.flight_number}</Link></td>
               <td>{f.origin}>{f.destination}</td>
               <td>{f.airplaneName}</td>
             </tr>
