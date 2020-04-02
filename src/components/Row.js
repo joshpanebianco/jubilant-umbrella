@@ -22,6 +22,7 @@ class Row extends Component {
 		return (
 			<div className="row">
 				{this.props.colArray.map((column) => <button
+					key={this.state.reservedRow + column}
 					className="single-seat"
 					value={column}
 					onClick={this._handleClick}
