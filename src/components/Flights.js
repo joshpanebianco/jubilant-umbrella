@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import FlightGallery from './FlightGallery';
+import FlightsDropdown from './FlightsDropdown';
 
 const SERVER_URL = 'http://localhost:3000/flights.json'
+const SERVER_URL_PLANES = 'http://localhost:3000/airplanes.json'
 
 class Flights extends Component {
   constructor(props) {
@@ -14,6 +16,7 @@ class Flights extends Component {
       origin: '',
       airplane: '',
       flights: [],
+      airplanes: [],
     };
 
     // bind this to each event handler function
@@ -33,6 +36,13 @@ class Flights extends Component {
     };
 
     fetchFlights();
+
+    const fetchAirplanes = () => {
+      axios.get(SERVER_URL_PLANES).then((results) => {
+        this.setState({airplanes: results.data});
+      });
+    }
+    fetchAirplanes();
   }
 
   saveFlight(newFlight) {
@@ -41,6 +51,7 @@ class Flights extends Component {
       date: this.state.date,
       destination: this.state.destination,
       origin: this.state.origin,
+      airplane_id: this.state.airplane,
     }).then((results) => {
       const allFlights = this.state.flights;
       allFlights.push(results.data);
@@ -65,8 +76,11 @@ class Flights extends Component {
     this.setState({origin: event.target.value});
   }
 
-  _handleChangeAirplane(event) {
-    this.setState({airplane: event.target.value});
+  _handleChangeAirplane(airplaneId) {
+    this.setState({airplane: airplaneId}, () =>
+  {
+    console.log(airplaneId);
+  });
   }
 
   _handleSubmit(event) {
@@ -115,11 +129,11 @@ class Flights extends Component {
           </label>
           <label>
             Plane
-            <input type='text' name='airplane' value={this.state.airplane} required onChange={ this._handleChangeAirplane } />
+            <FlightsDropdown airplanes={this.state.airplanes} onChange={this._handleChangeAirplane}/>
           </label>
           <input type='submit' value='Submit' />
         </form>
-        <FlightGallery flights={this.state.flights}/>
+        <FlightGallery flights={this.state.flights} airplanes={this.state.airplanes}/>
       </div>
     );
   };

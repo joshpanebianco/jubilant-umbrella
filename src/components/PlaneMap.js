@@ -12,8 +12,16 @@ class PlaneMap extends Component {
       reservedCol: '',
     };
 
+    console.log(this.state.rowArray);
+
+    this.changeArray = this.changeArray.bind(this);
     this.saveSeat = this.saveSeat.bind(this);
     this._handleSubmit = this._handleSubmit.bind(this);
+  }
+
+  changeArray = () => {
+    // console.log(this.props);
+    this.setState({rowArray: this.props.rowArray})
   }
 
   saveSeat(reservedRow, reservedCol) {
@@ -31,7 +39,7 @@ class PlaneMap extends Component {
     return (
       <div>
         <form onSubmit={this._handleSubmit}>
-          {this.state.rowArray.map((row) => <Row rowNumber={row} colArray={this.state.colArray} onSubmit={this.saveSeat}/>)}
+          {this.props.rowArray.map((row) => <Row key={row} rowNumber={row} colArray={this.props.colArray} onSubmit={this.saveSeat}/>)}
 
           <input type="submit" value="Submit"/>
         </form>
