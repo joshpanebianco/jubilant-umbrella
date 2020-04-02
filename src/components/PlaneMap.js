@@ -6,22 +6,16 @@ class PlaneMap extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      rowArray: [1,2,3,4],
-      colArray: [1,2,3,4],
+      rowArray: [],
+      colArray: [],
       reservedRow: '',
       reservedCol: '',
     };
 
     console.log(this.state.rowArray);
 
-    this.changeArray = this.changeArray.bind(this);
     this.saveSeat = this.saveSeat.bind(this);
     this._handleSubmit = this._handleSubmit.bind(this);
-  }
-
-  changeArray = () => {
-    // console.log(this.props);
-    this.setState({rowArray: this.props.rowArray})
   }
 
   saveSeat(reservedRow, reservedCol) {

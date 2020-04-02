@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import PlaneMap from './PlaneMap';
 import PlaneDropdown from './PlaneDropdown';
+import PlaneInfo from './PlaneInfo';
 
 const BASE_URL = 'http://localhost:3000/'
 const FLIGHTS_SERVER_URL = BASE_URL + 'flights.json';
@@ -38,7 +39,6 @@ class SeatingMap extends Component {
 		const fetchAirplanes = () => {
 			axios.get(AIRPLANES_SERVER_URL).then((results) => {
 				this.setState({airplanes: results.data});
-				console.log(this.state.airplanes);
 			});
 		};
 		fetchAirplanes();
@@ -46,7 +46,6 @@ class SeatingMap extends Component {
 		const fetchUsers = () => {
 				axios.get(USERS_SERVER_URL).then((results) => {
 					this.setState({usersJson: results.data});
-					setTimeout(fetchUsers, 4000)
 				});
 			};
 			fetchUsers();
@@ -61,7 +60,6 @@ class SeatingMap extends Component {
 						}
 					});
 					this.setState({reservedSeats: reservedSeats})
-					setTimeout(fetchReservations, 4000)
 				});
 			};
 			fetchReservations();
@@ -69,10 +67,10 @@ class SeatingMap extends Component {
 			const fetchFlights = () => {
 				axios.get(FLIGHTS_SERVER_URL).then((results) => {
 					this.setState({flightsJson: results.data});
-					setTimeout(fetchFlights, 4000)
 				});
 			};
 			fetchFlights();
+
 
 	}
 
@@ -86,10 +84,8 @@ class SeatingMap extends Component {
 			colArray.push(i);
 		}
 		console.log(rowArray);
-		this.setState({name: name, rows: rows, cols: cols, rowArray: rowArray, colArray: colArray}, () => {
-		console.log(`name: ${this.state.name}, rowArray: ${this.state.rowArray}`);
-	});
-		this.rowArray.current.changeArray();
+		console.log(name);
+		this.setState({name: name, rows: rows, cols: cols, rowArray: rowArray, colArray: colArray});
 	}
 
 	saveSeat(reservedRow, reservedCol) {
@@ -101,16 +97,19 @@ class SeatingMap extends Component {
 	render() {
 		return (
 			<div>
-				<h1>{this.props.match.params.flightId}</h1>
-				<h2>Choose Plane</h2>
-				<PlaneDropdown airplanes={this.state.airplanes} onSubmit={this._handleAirplaneChoice}/>
+				<h2>Reservation</h2>
+				<PlaneInfo onLoad={this._handleAirplaneChoice} flightId={this.state.flightId} airplanes={this.state.airplanes} flights={this.state.flightsJson}/>
 		    <h2>{this.state.name} Seating Map</h2>
 				<div className="seating-chart">
-				  <PlaneMap ref={this.rowArray} plane={this.state} rowArray={this.state.rowArray} colArray={this.state.colArray} onSubmit={this.saveSeat}/>
+				  <PlaneMap plane={this.state} rowArray={this.state.rowArray} colArray={this.state.colArray} onSubmit={this.saveSeat}/>
 				</div>
 			</div>
 		)
 	}
+
+	// componentDidMount() {
+	// 	this._handleAirplaneChoice(this.props.match.params.flightId);
+	// }
 }
 
 export default SeatingMap;

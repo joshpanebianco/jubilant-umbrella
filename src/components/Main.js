@@ -36,7 +36,7 @@ class Main extends Component {
     const fetchUsers = () => {
       axios.get(USERS_SERVER_URL).then((results) => {
         this.setState({usersJson: results.data});
-        setTimeout(fetchUsers, 4000)
+        // setTimeout(fetchUsers, 4000)
       });
     };
     fetchUsers();
@@ -44,7 +44,7 @@ class Main extends Component {
     const fetchReservations = () => {
       axios.get(RESERVATIONS_SERVER_URL).then((results) => {
         this.setState({reservationsJson: results.data});
-        setTimeout(fetchReservations, 4000)
+        // setTimeout(fetchReservations, 4000)
       });
     };
     fetchReservations();
@@ -52,7 +52,7 @@ class Main extends Component {
     const fetchFlights = () => {
       axios.get(FLIGHTS_SERVER_URL).then((results) => {
         this.setState({flightsJson: results.data});
-        setTimeout(fetchFlights, 4000)
+        // setTimeout(fetchFlights, 4000)
       });
     };
     fetchFlights();
@@ -60,7 +60,7 @@ class Main extends Component {
     const fetchAirplanes = () => {
       axios.get(AIRPLANES_SERVER_URL).then((results) => {
         this.setState({airplanesJson: results.data});
-        setTimeout(fetchAirplanes, 4000)
+        // setTimeout(fetchAirplanes, 4000)
       });
     };
     fetchAirplanes();
@@ -76,7 +76,7 @@ class Main extends Component {
           <Route exact path='/airplanes' component={Airplanes}></Route>
           <Route exact path='/flights' render={routeProps => <Flights projectInfo={this.state} />}></Route>
           <Route exact path='/search' render={routeProps => <Search projectInfo={this.state} />}></Route>
-          <Route exact path='/reservations' render={routeProps => <SeatingMap projectInfo={this.state} />}></Route>
+          {/* <Route exact path='/reservations' render={routeProps => <SeatingMap projectInfo={this.state} />}></Route> */}
           <Route exact path='/reservation/:flightId' component={SeatingMap}></Route>
 
 
