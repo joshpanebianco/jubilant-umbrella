@@ -68,12 +68,12 @@ class Reservation extends Component {
     render() {
         return (
             <div>
-				<h2>Plane: {this.state.airplanesJson[this.state.flightsJson.airplane_id-1].name}</h2>
+				{/* <h2>Plane: {this.state.airplanesJson[this.state.flightsJson.airplane_id-1].name}</h2>
 				<PlaneDropdown airplanes={this.state.airplanes} onSubmit={this._handleAirplaneChoice}/>
 		    <h2>{this.state.name} Seating Map</h2>
 				<div className="seating-chart">
 				  <PlaneMap ref={this.rowArray} plane={this.state} rowArray={this.state.rowArray} colArray={this.state.colArray} onSubmit={this.saveSeat}/>
-				</div>
+				</div> */}
 			</div>
         );
     }

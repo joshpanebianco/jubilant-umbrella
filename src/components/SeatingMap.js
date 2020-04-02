@@ -101,7 +101,6 @@ class SeatingMap extends Component {
 	render() {
 		return (
 			<div>
-				<h1>{this.props.match.params.flightId}</h1>
 				<h2>Choose Plane</h2>
 				<PlaneDropdown airplanes={this.state.airplanes} onSubmit={this._handleAirplaneChoice}/>
 		    <h2>{this.state.name} Seating Map</h2>
