@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class FlightGallery extends Component {
   constructor(props) {
@@ -23,7 +24,6 @@ class FlightGallery extends Component {
           <tbody>
             {this.props.flights.map ((flight) => {
               const airplaneId = flight.airplane_id;
-              // console.log(this.props);
               let airplaneName = '';
               this.props.airplanes.forEach((airplane) => {
                 if (airplaneId === airplane.id) {
@@ -33,7 +33,7 @@ class FlightGallery extends Component {
               });
               return (<tr key={flight.flight_number}>
                 <td>{flight.date}</td>
-                <td>{flight.flight_number}</td>
+                <td><Link to={`/reservation/${flight.id}`}>{flight.flight_number}</Link></td>
                 <td>{flight.origin} > {flight.destination}</td>
                 <td>{airplaneName}</td>
                 <td>0</td>
