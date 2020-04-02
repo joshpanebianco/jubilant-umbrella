@@ -32,6 +32,8 @@ class Reservation extends Component {
           const fetchReservations = () => {
             axios.get(RESERVATIONS_SERVER_URL).then((results) => {
               this.setState({reservationsJson: results.data});
+
+              // Get all reserved seats of this flight
               const reservedSeats = [];
               results.data.forEach((r) => {
                 if (r.flight_id === parseInt(this.state.flightId)) {
@@ -39,6 +41,7 @@ class Reservation extends Component {
                 }
               });
               this.setState({reservedSeats: reservedSeats})
+
               setTimeout(fetchReservations, 4000)
             });
           };
@@ -61,13 +64,17 @@ class Reservation extends Component {
           fetchAirplanes();
     }
 
-    
 
     render() {
         return (
             <div>
-                <h1>{this.props.match.params.flightId}</h1>
-            </div>
+				<h2>Plane: {this.state.airplanesJson[this.state.flightsJson.airplane_id-1].name}</h2>
+				<PlaneDropdown airplanes={this.state.airplanes} onSubmit={this._handleAirplaneChoice}/>
+		    <h2>{this.state.name} Seating Map</h2>
+				<div className="seating-chart">
+				  <PlaneMap ref={this.rowArray} plane={this.state} rowArray={this.state.rowArray} colArray={this.state.colArray} onSubmit={this.saveSeat}/>
+				</div>
+			</div>
         );
     }
 }
