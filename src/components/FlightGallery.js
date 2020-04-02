@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 
 class FlightGallery extends Component {
+  constructor(props) {
+    super(props);
+
+  }
+
   render() {
     return (
       <div>
@@ -16,15 +21,24 @@ class FlightGallery extends Component {
             </tr>
           </thead>
           <tbody>
-            {this.props.flights.map ((flight) =>
-              <tr key={flight.flight_number}>
+            {this.props.flights.map ((flight) => {
+              const airplaneId = flight.airplane_id;
+              // console.log(this.props);
+              let airplaneName = '';
+              this.props.airplanes.forEach((airplane) => {
+                if (airplaneId === airplane.id) {
+                  airplaneName = airplane.name;
+                }
+                console.log(airplane);
+              });
+              return (<tr key={flight.flight_number}>
                 <td>{flight.date}</td>
                 <td>{flight.flight_number}</td>
                 <td>{flight.origin} > {flight.destination}</td>
-                <td>{flight.airplane_id}</td>
+                <td>{airplaneName}</td>
                 <td>0</td>
-              </tr>
-            )}
+              </tr>);
+            })}
           </tbody>
         </table>
       </div>
